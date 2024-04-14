@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap);* {
+  box-sizing: border-box;
+  font-family: Poppins,sans-serif;
+  margin: 0;
+  scroll-behavior: smooth
+
+}
+body {
+  margin: 0;
+  font-family: Poppins;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 80px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:#222A35;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #575C66;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}
