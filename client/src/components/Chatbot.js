@@ -9,7 +9,7 @@ const Chatbot = () => {
             <div className={`${showChatBox ? 'flex' : 'hidden'} h-auto w-80  flex-col bg-white shadow-xl md:mb-2 rounded relative`}>
                 <i onClick={() => setShowChatBox(false)} className='fa cursor-pointer fa-times absolute top-1.5 text-cyan-800 right-2 text-lg'></i>
                 <div className='flex p-3 gap-2 bg-cyan-500 rounded-t items-center' >
-                    <img src={Sagar} className='h-12 w-12 rounded-full' />
+                    <img src={Sagar} className='h-12 w-12 rounded-full' alt='user icon' />
                     <div className='flex flex-col text-white'>
                         <span className='font-bold'>{Bio.name}</span>
                         <span className='text-xs text-gray-100'>Typically replies within and hour</span>
@@ -20,7 +20,7 @@ const Chatbot = () => {
                         <span>Hey, &#128075;</span>
                         <span>Drop me a message and let's talk</span>
                     </div>
-                    <a target='_blank' href="https://api.whatsapp.com/send/?phone=9372925369&text='Hey'&type=phone_number&app_absent=0" className='self-center flex gap-3 py-1.5 items-center cursor-pointer font-semibold text-sm bg-cyan-500 text-white p-3 rounded'>
+                    <a target='_blank' rel='noreferrer' href="https://api.whatsapp.com/send/?phone=9372925369&text='Hey'&type=phone_number&app_absent=0" className='self-center flex gap-3 py-1.5 items-center cursor-pointer font-semibold text-sm bg-cyan-500 text-white p-3 rounded'>
                         <i className='fab fa-whatsapp text-xl'></i>
                         <span>Send Message</span>
                     </a>

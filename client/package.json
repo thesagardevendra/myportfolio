@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "/portfolio",
   "private": true,
   "dependencies": {
     "@mui/lab": "^5.0.0-alpha.130",
