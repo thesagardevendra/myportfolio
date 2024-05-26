@@ -15,7 +15,20 @@ const Accomplishment = () => {
                         <img alt='SMFG' className='h-10 rounded w-10  bg-white p-0.5' src={logo} />
                     </span>
                     <h3 className="flex items-center mb-1 ml-2 text-lg font-semibold text-cyan-500 dark:text-gray-500">SMFG India (Formerly Fullerton India) Credit Company Limited<span className="dark:bg-cyan-200 dark:text-cyan-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-cyan-900 text-cyan-300 ms-3">Present</span></h3>
-                    <time className=" ml-2 mb-2 flex items-center gap-2 text-sm font-normal  text-gray-400 dark:text-gray-500">October 1st, 2023 - Present<i className='fa fa-circle text-[4px]'></i> 7mon</time>
+                    <time className=" ml-2 mb-2 flex items-center gap-2 text-sm font-normal  text-gray-400 dark:text-gray-500">April 1st, 2024 - Present</time>
+                    <div className='flex flex-col md:flex-row md:items-center gap-2'>
+                    <span className="dark:bg-cyan-200 w-28 dark:text-cyan-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded  bg-cyan-700 text-gray-100 ">Promoted As</span>
+                        <p className="  text-base font-normal text-gray-500 dark:text-gray-400">
+                           Manager - IT Development</p>
+                    </div>
+
+                </li>
+                <li className="mb-10 ms-6">
+                    <span className="absolute flex items-center justify-center w-14 h-10 rounded-full -start-7 ">
+                        <img alt='SMFG' className='h-10 rounded w-10  bg-white p-0.5' src={logo} />
+                    </span>
+                    <h3 className="flex items-center mb-1 ml-2 text-lg font-semibold text-cyan-500 dark:text-gray-500">SMFG India (Formerly Fullerton India) Credit Company Limited</h3>
+                    <time className=" ml-2 mb-2 flex items-center gap-2 text-sm font-normal  text-gray-400 dark:text-gray-500">October 1st, 2023 - March 31st, 2024</time>
                     <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 ml-2">Assitant Manager - IT Development</p>
                 </li>
                 <li className="mb-10 ms-6">
@@ -40,17 +53,17 @@ const Accomplishment = () => {
                     <span className="absolute flex items-center justify-center w-14 h-10 rounded-full -start-7 ">
                         <img alt='Crio Logo' className='h-10 rounded w-10 object-contain bg-white p-0.5' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjHs7GsF8cxV0NEu0-p4OQQ0u6SY-tnvlRXElVOXbmIg&s' />
                     </span>
-                   
+
                     <h3 className="flex items-center mb-1 ml-2 text-lg font-semibold text-cyan-500 dark:text-gray-500">Crio.Do
                     </h3>
                     <time className=" ml-2 mb-2 flex items-center gap-2 text-sm font-normal  text-gray-400 dark:text-gray-500">February 1st, 2020 - September 30th, 2021 </time>
                     <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400 ml-2">Student Trainee</p>
                 </li>
                 <li className="mb-10 ms-6">
-                <span className="absolute flex items-center justify-center w-14 h-10 rounded-full -start-7 ">
+                    <span className="absolute flex items-center justify-center w-14 h-10 rounded-full -start-7 ">
                         <img alt='SIES Logo' className='h-10 rounded w-10  bg-white p-0.5' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnIqBC3RTJgSi_1krPk6V5MomkuNGi4LGIPET_qm6L6A&s' />
                     </span>
-                
+
                     <h3 className="flex items-center mb-1 ml-2 text-lg font-semibold text-cyan-500 dark:text-gray-500">SIES College of Commerce and Economics
                         {/* <span className="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ms-3">Latest</span> */}
                     </h3>

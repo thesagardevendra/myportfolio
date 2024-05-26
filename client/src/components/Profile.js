@@ -1,7 +1,7 @@
 import React from 'react'
 import Typewriter from 'typewriter-effect';
 import Sagar from '../assets/Sagar.jpg';
-import { Bio } from '../constants';
+import { Bio } from '../constants'
 
 const Profile = () => {
     return (
@@ -26,7 +26,7 @@ const Profile = () => {
             <ol className='flex flex-wrap flex-grow gap-10 my-3 pt-0 md:px-5 px-2'>
                 <li className='flex text-white flex-col space-y-2 '>
                     <span className=' dark:text-gray-500  font-semibold md:text-lg'><i className='fa fa-file mr-1'></i> Curriculum Vitae</span>
-                    <a href='tel:9372925369' className='bg-cyan-500 hover:scale-105 transition-all text-sm duration-300 w-[130px] text-center font-semibold  px-3 py-2 mb-5  rounded text-white'>Check Now<i className='fa fa-external-link  ml-2'></i></a>
+                    <a rel="noreferrer noopener" href='https://thesagardevendra.github.io/portfolio/SagarDevendra.pdf'  target="_blank" className='bg-cyan-500 hover:scale-105 transition-all text-sm duration-300 w-[130px] text-center font-semibold  px-3 py-2 mb-5  rounded text-white'>Check Now<i className='fa fa-external-link  ml-2'></i></a>
                 </li>
                 <li className='flex text-white flex-col space-y-2 '>
                     <span className=' dark:text-gray-500  font-semibold md:text-lg'><i className='fa fa-phone rotate-90 mr-1'></i> +91-9372925369</span>

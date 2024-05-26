@@ -17,7 +17,7 @@ const Header = () => {
         <header className='h-[75px] z-10 fixed top-0 w-screen  px-2 pl-0 flex items-center lg:justify-around justify-between border-b dark:border-gray-500 border-gray-400 dark:bg-gray-50 bg-gray-950'>
             <div className='flex md:whitespace-nowrap items-center text-rose-500 md:text-xl font-semibold justify-center space-x-0.5'>
                 {/* <span>const Title =</span> */}
-                <span className='md:text-2xl text-xl pl-2 md:pl-5  text-cyan-500 font-semibold w-10 md:w-auto'>{Bio.name}</span>
+                <NavLink onClick={scrollToTop} to="profile" className='md:text-2xl text-xl pl-2 md:pl-5  text-cyan-500 font-semibold w-10 md:w-auto'>{Bio.name}</NavLink>
             </div>
             <div className='hidden lg:flex  items-center space-x-7  font-medium text-base'>
                 {NavlinkList.map((navLinkData) => {
