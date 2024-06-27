@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-const ImageCarousel = ({ images }) => {
+const ImageGrid = ({ images }) => {
   const carouselRef = useRef(null);
 
   const scrollLeft = () => {
@@ -16,14 +16,18 @@ const ImageCarousel = ({ images }) => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
       <div
         ref={carouselRef}
-        className="flex overflow-x-scroll scroll-smooth snap-x snap-mandatory"
+        className="grid grid-cols-3 gap-4 p-4 overflow-x-auto scroll-smooth"
       >
         {images.map((image, index) => (
-          <div key={index} className="flex-shrink-0 w-full snap-start">
-            <img src={image} alt={`Slide ${index}`} className="w-full" />
+          <div key={index} className="relative">
+            <img
+              src={image}
+              alt={`Image ${index}`}
+              className="w-full h-full object-cover rounded-lg"
+            />
           </div>
         ))}
       </div>
@@ -43,4 +47,4 @@ const ImageCarousel = ({ images }) => {
   );
 };
 
-export default ImageCarousel;
+export default ImageGrid;
