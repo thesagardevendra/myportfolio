@@ -1,50 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const ImageGrid = ({ images }) => {
-  const carouselRef = useRef(null);
+const LazyImage = ({ src, alt }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const imageRef = useRef();
 
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+  useEffect(() => {
+    let observer;
+    const currentImage = imageRef.current;
+
+    if (currentImage) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setImageSrc(src);
+            observer.unobserve(currentImage);
+          }
+        });
+      });
+
+      observer.observe(currentImage);
     }
-  };
 
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
-  };
+    return () => {
+      if (observer && currentImage) {
+        observer.unobserve(currentImage);
+      }
+    };
+  }, [src]);
 
-  return (
-    <div className="relative w-full h-full overflow-hidden">
-      <div
-        ref={carouselRef}
-        className="grid grid-cols-3 gap-4 p-4 overflow-x-auto scroll-smooth"
-      >
-        {images.map((image, index) => (
-          <div key={index} className="relative">
-            <img
-              src={image}
-              alt={`Image ${index}`}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 opacity-75 hover:opacity-100"
-      >
-        &#8592;
-      </button>
-      <button
-        onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 opacity-75 hover:opacity-100"
-      >
-        &#8594;
-      </button>
-    </div>
-  );
+  return <img ref={imageRef} src={imageSrc} alt={alt} />;
 };
 
-export default ImageGrid;
+export default LazyImage;
