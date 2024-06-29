@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Banner from "../assets/Banner.jpg";
 import Logo from "../assets/banner2.jpg";
 import Banner3 from "../assets/Captain/banner3.JPG";
@@ -30,20 +30,33 @@ const images = [
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const startAutoScroll = () => {
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 9000); // Change image every 9 seconds
-    return () => clearInterval(interval);
+  };
+
+  const stopAutoScroll = () => {
+    clearInterval(intervalRef.current);
+  };
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => stopAutoScroll();
   }, []);
 
   const goToNextSlide = () => {
+    stopAutoScroll();
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    startAutoScroll();
   };
 
   const goToPreviousSlide = () => {
+    stopAutoScroll();
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    startAutoScroll();
   };
 
   return (
