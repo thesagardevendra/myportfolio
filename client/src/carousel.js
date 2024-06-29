@@ -33,9 +33,13 @@ const Carousel = () => {
   const carouselRef = useRef(null);
   const isScrolling = useRef(false);
   const scrollTimeout = useRef(null);
+  const autoScrollInterval = useRef(null);
 
   const startAutoScroll = () => {
-    return setInterval(() => {
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+    }
+    autoScrollInterval.current = setInterval(() => {
       if (!isScrolling.current) {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       }
@@ -43,8 +47,8 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    const interval = startAutoScroll();
-    return () => clearInterval(interval);
+    startAutoScroll();
+    return () => clearInterval(autoScrollInterval.current);
   }, []);
 
   useEffect(() => {
@@ -62,14 +66,13 @@ const Carousel = () => {
       const newIndex = Math.round(scrollLeft / carouselRef.current.clientWidth);
       setCurrentIndex(newIndex);
 
-      // Reset auto-scroll interval
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
       isScrolling.current = true;
       scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false;
-      }, 1000); // Prevent auto-scroll for 1 second after manual scroll
+      }, 1000);
     }
   };
 
@@ -94,7 +97,8 @@ const Carousel = () => {
     }
     scrollTimeout.current = setTimeout(() => {
       isScrolling.current = false;
-    }, 1000); // Prevent auto-scroll for 1 second after manual scroll
+      startAutoScroll();
+    }, 1000);
   };
 
   return (
