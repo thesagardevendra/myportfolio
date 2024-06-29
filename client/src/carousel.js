@@ -62,6 +62,27 @@ const Carousel = () => {
         ))}
       </div>
 
+      <div className="absolute bottom-32 left-5 flex flex-col justify-center gap-3 pb-4">
+        <div className="flex flex-col gap-2">
+          {images.map((item, index) => (
+            <div className="flex flex-col" key={index}>
+              <div
+                className={`${
+                  currentIndex === index ? "flex flex-col gap-2 transition-all duration-300 text-white" : "hidden"
+                }`}
+              >
+                <span className="md:text-6xl">
+                  {item.content}
+                </span>
+                <span className="md:text-3xl text-base">
+                  {item.description}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <button
         onClick={goToPreviousSlide}
         className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
