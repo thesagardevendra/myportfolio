@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Banner from "../assets/Banner.jpg";
 import Logo from "../assets/banner2.jpg";
 import Banner3 from "../assets/Captain/banner3.JPG";
@@ -30,121 +30,52 @@ const images = [
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const carouselRef = useRef(null);
-  const isScrolling = useRef(false);
-  const scrollTimeout = useRef(null);
-  const autoScrollInterval = useRef(null);
 
-  const startAutoScroll = () => {
-    if (autoScrollInterval.current) {
-      clearInterval(autoScrollInterval.current);
-    }
-    autoScrollInterval.current = setInterval(() => {
-      if (!isScrolling.current) {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 9000); // Change image every 9 seconds
-  };
-
-  useEffect(() => {
-    startAutoScroll();
-    return () => clearInterval(autoScrollInterval.current);
+    return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: currentIndex * carouselRef.current.clientWidth,
-        behavior: 'smooth',
-      });
-    }
-  }, [currentIndex]);
-
-  const handleScroll = () => {
-    if (carouselRef.current) {
-      const scrollLeft = carouselRef.current.scrollLeft;
-      const newIndex = Math.round(scrollLeft / carouselRef.current.clientWidth);
-      setCurrentIndex(newIndex);
-
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      isScrolling.current = true;
-      scrollTimeout.current = setTimeout(() => {
-        isScrolling.current = false;
-      }, 1000);
-    }
+  const goToNextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  useEffect(() => {
-    const carouselElement = carouselRef.current;
-    if (carouselElement) {
-      carouselElement.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (carouselElement) {
-        carouselElement.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-    isScrolling.current = true;
-    if (scrollTimeout.current) {
-      clearTimeout(scrollTimeout.current);
-    }
-    scrollTimeout.current = setTimeout(() => {
-      isScrolling.current = false;
-      startAutoScroll();
-    }, 1000);
+  const goToPreviousSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
     <div className="relative w-screen h-screen overflow-hidden" style={{ scrollSnapType: 'x mandatory' }}>
       <div
-        ref={carouselRef}
-        className="flex w-screen h-full overflow-x-scroll scroll-smooth snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none' }}
+        className="flex w-screen transition-transform h-full duration-500"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="flex-shrink-0 w-full h-full snap-center">
-            <img
-              src={image.image}
-              alt={`Slide ${index}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <img
+            key={index}
+            src={image.image}
+            alt={`Slide ${index}`}
+            className="w-full min-w-full brightness-95 h-full object-cover"
+          />
         ))}
       </div>
-      <div className="absolute bottom-32 left-5 flex flex-col justify-center gap-3 pb-4">
-        <div className="flex flex-col gap-2">
-          {images.map((item, index) => (
-            <div className="flex flex-col" key={index}>
-              <div
-                className={`${
-                  currentIndex === index ? "flex flex-col gap-2 transition-all duration-300 text-white" : "hidden"
-                }`}
-              >
-                <span className="md:text-6xl">{item.content}</span>
-                <span className="md:text-3xl text-base">{item.description}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="flex drop-shadow-2xl items-center gap-3 ml-5">
-          {images.map((_, index) => (
-            <span
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`h-4 w-4 rounded-full drop-shadow-2xl hover:bg-orange-500 cursor-pointer ${
-                currentIndex === index ? "bg-orange-500" : "bg-gray-100"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
+
+      <button
+        onClick={goToPreviousSlide}
+        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+        style={{ zIndex: 1 }}
+      >
+        &#10094;
+      </button>
+      <button
+        onClick={goToNextSlide}
+        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+        style={{ zIndex: 1 }}
+      >
+        &#10095;
+      </button>
     </div>
   );
 };
