@@ -1,73 +1,92 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const Modal = ({ isOpen, onClose, imageUrl }) => {
-  if (!isOpen) return null;
+const images = [
+  'image1.jpg',
+  'image2.jpg',
+  'image3.jpg',
+];
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-75">
-      <div className="relative">
-        <img src={imageUrl} alt="Large View" className="max-w-full max-h-screen" />
-        <button
-          className="absolute top-2 right-2 text-white bg-red-500 rounded-full p-2"
-          onClick={onClose}
-        >
-          &times;
-        </button>
-      </div>
-    </div>
-  );
-};
+const Carousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const isScrolling = useRef(false);
 
-export default Modal;
+  useEffect(() => {
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const scrollLeft = carouselRef.current.scrollLeft;
+        const newIndex = Math.round(scrollLeft / carouselRef.current.clientWidth);
+        setCurrentIndex(newIndex);
+      }
+    };
 
+    const carouselElement = carouselRef.current;
+    if (carouselElement) {
+      carouselElement.addEventListener('scroll', handleScroll);
+    }
 
+    return () => {
+      if (carouselElement) {
+        carouselElement.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
 
-import React, { useState } from 'react';
-import Modal from './Modal';
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isScrolling.current) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }
+    }, 3000); // Change image every 3 seconds
 
-import image1 from './assets/image1.jpg';
-import image2 from './assets/image2.jpg';
-import image3 from './assets/image3.jpg';
-// Add more imports as needed
+    return () => clearInterval(interval);
+  }, []);
 
-const Gallery = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({
+        left: currentIndex * carouselRef.current.clientWidth,
+        behavior: 'smooth',
+      });
+    }
+  }, [currentIndex]);
 
-  const images = [
-    image1,
-    image2,
-    image3,
-    // Add more images as needed
-  ];
-
-  const openModal = (imageUrl) => {
-    setSelectedImage(imageUrl);
-    setIsModalOpen(true);
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    isScrolling.current = true;
+    setTimeout(() => {
+      isScrolling.current = false;
+    }, 1000); // Prevent auto-scroll for 1 second after manual scroll
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedImage('');
-  };
-
   return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
+    <div className="relative max-w-4xl mx-auto">
+      <div
+        ref={carouselRef}
+        className="overflow-hidden flex"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
         {images.map((image, index) => (
           <img
             key={index}
             src={image}
-            alt={`Thumbnail ${index}`}
-            className="cursor-pointer transform transition duration-200 hover:scale-105"
-            onClick={() => openModal(image)}
+            alt={`Slide ${index}`}
+            className="w-full h-64 object-cover flex-shrink-0"
+            style={{ scrollSnapAlign: 'start' }}
           />
         ))}
       </div>
-
-      <Modal isOpen={isModalOpen} onClose={closeModal} imageUrl={selectedImage} />
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 pb-4">
+        {images.map((_, index) => (
+          <span
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`h-3 w-3 rounded-full cursor-pointer ${currentIndex === index ? 'bg-gray-800' : 'bg-gray-400'}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Gallery;
+export default Carousel;
