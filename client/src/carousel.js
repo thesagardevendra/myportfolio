@@ -1,22 +1,6 @@
-Key Responsibilities:
-	•	Develop and maintain complex web applications using Angular and Angular JS
-	•	Design and implement responsive screens ensuring a seamless user experience across devices
-	•	Integrate complex APIs to enable rich functionality and seamless data interaction
-	•	Utilize Angular Material, Tailwind CSS, and Bootstrap for consistent and visually appealing design
-	•	Collaborate with cross-functional teams to define, design, and ship new features
-	•	Ensure the technical feasibility of UI/UX designs
-	•	Optimize application for maximum speed and scalability
-	•	Troubleshoot and debug existing applications
-	•	Stay up-to-date with the latest industry trends and technologies
-
-Qualifications:
-	•	Proficiency in HTML, CSS, and JavaScript
-	•	Strong understanding of TypeScript
-	•	Experience with RESTful services and complex API integrations
-	•	Expertise in designing and implementing responsive screens
-	•	Proficiency with Angular Material, Tailwind CSS, and Bootstrap
-	•	Familiarity with Angular CLI and build tools
-	•	Knowledge of front-end frameworks and libraries (e.g., RxJS, NgRx)
-	•	Experience with version control systems (e.g., Git)
-	•	Strong problem-solving skills and attention to detail
-	•	Excellent communication and teamwork skills
+Hi Tejas and Abhishek,
+Thanks for the get it touch with us,
+we have worked on various requirement and
+some are achievable as the salesforce is directly providing some functionality  
+The ask is we need to develop custom reports and introduce new fields at the time of report generation and do some arthermtic operations.
+Please get back on the ask it is fesibale to do and what are the posibiitiees.
